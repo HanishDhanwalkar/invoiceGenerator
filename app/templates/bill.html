@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" style="margin-left: 7%; margin-top: 2%;">
+  <h1>Invoice</h1>
+  <h5>Fashion Shop, <br>
+      IIT Bombay,<br>
+      Powai, Mumbai 400076
+  </h5>
+
+  <div id="billItems"></div>
+  <p id="totalPrice"></p>
+
+  <button onclick="printBill()">Print Bill</button>
+</div>
+
+
+  <script>
+    var storedItems = JSON.parse(localStorage.getItem('selectedItems'));
+    var billItemsElement = document.getElementById('billItems');
+    var totalPriceElement = document.getElementById('totalPrice');
+    var totalBill = 0;
+
+    if (storedItems && storedItems.length > 0) {
+      for (var i = 0; i < storedItems.length; i++) {
+        var item = storedItems[i];
+        var itemName = item.name;
+        var itemPrice = item.price;
+
+        var itemElement = document.createElement('p');
+        itemElement.textContent =  itemName + ' -- ₹' + itemPrice;
+        billItemsElement.appendChild(itemElement);
+
+        totalBill += itemPrice;
+      }
+    }
+
+    totalPriceElement.textContent = 'Total Bill: ₹' +  + totalBill;
+
+    function printBill() {
+      var printWindow = window.open('', '_blank');
+      printWindow.document.open();
+
+      var billContent = document.getElementById('billItems').innerHTML;
+      var billTotal = document.getElementById('totalPrice').innerHTML;
+
+      printWindow.document.write('<html><head><title>Printed Bill</title></head><body>');
+      printWindow.document.write('<h1>Invoice</h1><hr>'+
+                                ' <h5>Fashion Shop, <br> IIT Bombay,<br> Powai, Mumbai 400076 '+
+                                '<br> tele no. 0123456789</h5>'+
+                                '<h3> Item  &emsp; Price </h3>'
+                                
+                                );
+
+
+      printWindow.document.write(billContent);
+      printWindow.document.write('<h3>' + billTotal + '</h3>');
+      printWindow.document.write('</body></html>');
+
+      printWindow.document.close();
+      printWindow.print();
+    }
+  </script>
+
+{% endblock %}
