@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+
+
+  <div class="item">
+    <div class="card" style="width: 18rem;">
+      <img src="https://assets.ajio.com/medias/sys_master/root/20210316/vjmc/604fb3b0aeb2696981864c60/-473Wx593H-460789301-blue-MARKETING.jpg" alt="Item 1" width="200" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h4 class="card-title">Jeans #1</h4>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, a.</p>
+        <h4><p>Price: &#8377; 1999</p></h4>
+        <button onclick="storePrice('Item 1', 1999) " class="btn btn-primary btn-sm">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="item">
+    <div class="card" style="width: 18rem;">
+      <img src="https://assets.ajio.com/medias/sys_master/root/20220317/4ExL/62323f25aeb26921afded401/-473Wx593H-469157895-bluegold-MODEL.jpg" alt="Item 2" width="200" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h4 class="card-title">Jeans #2</h4>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, a.</p>
+        <h4><p>Price: &#8377; 1599</p></h4>
+        <button onclick="storePrice('Item 2', 1599)" class="btn btn-primary btn-sm">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="card" style="width: 18rem;">
+      <img src="https://images.bestsellerclothing.in/data/JJ/14-nov-2022/221203701_g0.jpg?width=415&height=550&mode=fill&fill=blur&format=auto" alt="Item 3" width="200" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h4 class="card-title">Jeans #2</h4>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, a.</p>
+        <h4><p>Price:  &#8377; 2199</p></h4>
+        <button onclick="storePrice('Item 3', 2199)" class="btn btn-primary btn-sm">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+<br>
+<div class="container">  <button onclick="redirectToBill()" class="btn btn-primary btn-lg">Buy</button></div>
+
+
+  
+<script>
+    var totalPrice = 0;
+    var selectedItems = [];
+
+
+    function storePrice(itemName, price) {
+      totalPrice += price;
+      selectedItems.push({ name: itemName, price: price });
+    }
+
+
+
+    function redirectToBill() {
+      localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+      window.location.href = 'bill';
+    }
+  </script>
+
+
+{% endblock %}
